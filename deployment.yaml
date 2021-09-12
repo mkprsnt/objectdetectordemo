@@ -1,3 +1,4 @@
+###Deployment section is responsible for keeping a set of pods running
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,6 +6,7 @@ metadata:
   labels:
     app: objdetectordemo
 spec:
+  # Specify the number of pods to be running and add labels
   replicas: 1
   selector:
     matchLabels:
@@ -30,11 +32,14 @@ spec:
         hostPath:
           path: /dev/video0
 ---
+###Service is responsible for enabling network access to a set of pods
 apiVersion: v1
 kind: Service
 metadata:
   name: objdetectordemo-service
 spec:
+  # Expose the service on a static port on each node
+  # so that we can access the service from outside the cluster
   selector:
     app: objdetectordemo
   ports:
