@@ -14,7 +14,24 @@ To run the application with video feed, pls use the following command.
 docker run -p 8000:8000 --device /dev/video0 mkprsnt/objdetectordemo
 ```
 ## Kubernetes
-The app can be deployed in kubernetes using the following commands
+Parameters for deployemnt to kubernetes like number of replicas, ports etc., are specified in the deployment.yaml file   
+```sh
+##Deployment 
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+    .
+    .
+    .
+    .
+##Service
+    ports:
+    - protocol: TCP
+      port: 8000
+```
+   
+After deciding the appropriate parameters for your deployment, the app can be deployed in kubernetes using the following commands
 
 ```sh
 kubectl apply -f deployment.yaml
